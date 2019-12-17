@@ -27,14 +27,13 @@ public class ApplianceDAOImpl implements ApplianceDAO {
 		Map<String, String> parametres;
 
 		try {
-			File file = new File("C:\\Workspace\\JD1\\jd1-les21-criteria02-v4\\resources\\appliances_db.txt");
-			@SuppressWarnings("resource")
+			File file = new File("resources/appliances_db.txt");
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String line = null;
 			while (reader.ready()) {
 				line = reader.readLine();
 				String[] x = line.split(" : ");
-				// System.out.println(x[0]);
+				System.out.println(x[0]);
 				if (category.equalsIgnoreCase(x[0])) {
 					parametres = fillParametres(x[0]);
 					if (compareCriteria(parametres, criteria.getCriteria())) {
@@ -43,6 +42,7 @@ public class ApplianceDAOImpl implements ApplianceDAO {
 				}
 
 			}
+			reader.close();
 
 		} catch (IOException e) {
 
@@ -66,7 +66,6 @@ public class ApplianceDAOImpl implements ApplianceDAO {
 		return fillParametres;
 	}
 
-	@SuppressWarnings("unused")
 	private boolean compareCriteria(Map<String, String> parametres, Map<String, String> criteria) {
 
 		boolean isCopmare = true;
